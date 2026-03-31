@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EntrepriseController;
 use App\Http\Controllers\PostController;
@@ -82,7 +83,7 @@ Route::get('/user_privileges/getformdetails', [UserPrivilegeController::class, '
 
 
 // Facebook
-Route::group(['middleware'=>['web']],function(){
+Route::group(['middleware' => ['web']], function () {
     // Facebook
     Route::get('/facebook/auth', function () {
         return Socialite::driver('facebook')->redirect();
@@ -91,27 +92,33 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('/facebook/callback', function () {
         $user = Socialite::driver('facebook')->user();
         return dd($user);
+
+        // 🔥 ici tu récupères :
+        // access_token
+        // user info
+
+        // return redirect('http://localhost:4200/social-success?token=' . $user->token);
     });
 
     // Tiktok
-//    Route::get('/tiktok/auth', function () {
-//         return Socialite::driver('tiktok')->redirect();
-//     });
+    //    Route::get('/tiktok/auth', function () {
+    //         return Socialite::driver('tiktok')->redirect();
+    //     });
 
-//     Route::get('/tiktok/callback', function () {
-//         $user = Socialite::driver('tiktok')->user();
-//         dd($user);
-//     });
+    //     Route::get('/tiktok/callback', function () {
+    //         $user = Socialite::driver('tiktok')->user();
+    //         dd($user);
+    //     });
 
-//     // Tiktok
-//    Route::get('/linkedin/auth', function () {
-//         return Socialite::driver('linkedin')->redirect();
-//     });
+    //     // Tiktok
+    //    Route::get('/linkedin/auth', function () {
+    //         return Socialite::driver('linkedin')->redirect();
+    //     });
 
-//     Route::get('/linkedin/callback', function () {
-//         $user = Socialite::driver('linkedin')->user();
-//         dd($user);
-//     });
+    //     Route::get('/linkedin/callback', function () {
+    //         $user = Socialite::driver('linkedin')->user();
+    //         dd($user);
+    //     });
 
 });
 
