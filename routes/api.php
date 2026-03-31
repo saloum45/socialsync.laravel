@@ -10,6 +10,7 @@ use App\Http\Controllers\TypeSocialAccountController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserPrivilegeController;
 use Laravel\Socialite\Socialite;
+use App\Models\SocialAccount;
 
 // Routes pour le contrôleur EntrepriseController
 Route::get('/entreprises', [EntrepriseController::class, 'index']);
@@ -89,15 +90,21 @@ Route::group(['middleware' => ['web']], function () {
         return Socialite::driver('facebook')->redirect();
     });
 
-    Route::get('/facebook/callback', function () {
+    Route::get('/facebook/callback', function (SocialAccountController $social_account) {
         $user = Socialite::driver('facebook')->user();
+        // $social_account->store()
+        SocialAccount::insert([
+            'access_token'=>$user->token,
+            'refresh_token'=>$user->refreshToken,
+            'account_name'=>$user->name,
+            'expires_at'=> now()->addDays($user->expiresIn/86400),
+            'account_id'=>$user->id,
+            'id_type_social_account'=>1,
+            'id_entreprise'=>1,
+            'id_user'=>1,
+        ]);
+        // socket_io puis message vous pouvez fermer cette page et revenir sur l'app
         return dd($user);
-
-        // 🔥 ici tu récupères :
-        // access_token
-        // user info
-
-        // return redirect('http://localhost:4200/social-success?token=' . $user->token);
     });
 
     // Tiktok
