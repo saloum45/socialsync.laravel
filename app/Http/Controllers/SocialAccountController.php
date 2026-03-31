@@ -14,7 +14,7 @@ class SocialAccountController extends Controller
     use GenerateApiResponse;
 
         /**
-     * Display a listing of the resource.
+     * Displa y a listing of the resource.
      *
      * @return \Illuminate\Http\JsonResponse
      */
