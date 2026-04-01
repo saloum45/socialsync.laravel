@@ -95,14 +95,14 @@ Route::group(['middleware' => ['web']], function () {
         $user = Socialite::driver('facebook')->user();
         // $social_account->store()
         SocialAccount::insert([
-            'access_token'=>$user->token,
-            'refresh_token'=>$user->refreshToken,
-            'account_name'=>$user->name,
-            'expires_at'=> now()->addDays($user->expiresIn/86400),
-            'account_id'=>$user->id,
-            'id_type_social_account'=>1,
-            'id_entreprise'=>1,
-            'id_user'=>1,
+            'access_token' => $user->token,
+            'refresh_token' => $user->refreshToken,
+            'account_name' => $user->name,
+            'expires_at' => now()->addDays($user->expiresIn / 86400),
+            'account_id' => $user->id,
+            'id_type_social_account' => 1,
+            'id_entreprise' => 1,
+            'id_user' => 1,
         ]);
         // socket_io puis message vous pouvez fermer cette page et revenir sur l'app
         return dd($user);
@@ -118,16 +118,15 @@ Route::group(['middleware' => ['web']], function () {
     //         dd($user);
     //     });
 
-    //     // Tiktok
-    //    Route::get('/linkedin/auth', function () {
-    //         return Socialite::driver('linkedin')->redirect();
-    //     });
+    // Linkedin
+    Route::get('/linkedin/auth', function () {
+        return Socialite::driver('linkedin')->redirect();
+    });
 
-    //     Route::get('/linkedin/callback', function () {
-    //         $user = Socialite::driver('linkedin')->user();
-    //         dd($user);
-    //     });
-
+    Route::get('/linkedin/callback', function () {
+        $user = Socialite::driver('linkedin')->user();
+        dd($user);
+    });
 });
 
 
