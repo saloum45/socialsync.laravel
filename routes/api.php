@@ -88,6 +88,7 @@ Route::group(['middleware' => ['web']], function () {
     // Facebook
     Route::get('/facebook/auth', function () {
         return Socialite::driver('facebook')->redirect();
+        // return Socialite::driver('facebook')->scopes('pages_show_list')->redirect();
     });
 
     Route::get('/facebook/callback', function (SocialAccountController $social_account) {
