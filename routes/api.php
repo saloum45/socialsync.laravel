@@ -120,7 +120,8 @@ Route::group(['middleware' => ['web']], function () {
 
     // Linkedin
     Route::get('/linkedin/auth', function () {
-        return Socialite::driver('linkedin')->scopes('openid')->redirect();
+        // return Socialite::driver('linkedin')->scopes(['openid', 'profile', 'email'])->redirect();
+        return Socialite::driver('linkedin')->redirect();
     });
 
     Route::get('/linkedin/callback', function () {
