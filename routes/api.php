@@ -138,6 +138,26 @@ Route::group(['middleware' => ['web']], function () {
         ]);
         dd($user);
     });
+
+    // x
+    Route::get('/x/auth', function () {
+        return Socialite::driver('x')->redirect();
+    });
+
+    Route::get('/x/callback', function () {
+        $user = Socialite::driver('x')->user();
+        // SocialAccount::insert([
+        //     'access_token' => $user->token,
+        //     'refresh_token' => $user->refreshToken,
+        //     'account_name' => $user->name,
+        //     'expires_at' => now()->addDays($user->expiresIn / 86400),
+        //     'account_id' => $user->id,
+        //     'id_type_social_account' => 4,
+        //     'id_entreprise' => 1,
+        //     'id_user' => 1,
+        // ]);
+        dd($user);
+    });
 });
 
 

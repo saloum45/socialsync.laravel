@@ -46,4 +46,10 @@ return [
         'client_secret' => env('LINKEDIN_CLIENT_SECRET'),
         'redirect' => env('LINKEDIN_CALLBACK_REDIRECT'),
     ],
+
+    'x' => [
+        'client_id' => env('X_CLIENT_ID'),
+        'client_secret' => env('X_CLIENT_SECRET'),
+        'redirect' => env('X_CALLBACK_REDIRECT'),
+    ],
 ];
